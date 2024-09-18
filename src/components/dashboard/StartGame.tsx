@@ -6,10 +6,16 @@ function StartGame() {
     function handleStartGame(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         console.log('Starting game...');
+
+        // Create game user
+
+        // Create game session with new user ID
+
+        // Redirect user to new game page
     }
 
     const formVariants: Variants = {
-        hidden: { x: '100vw', rotate: 20, opacity: 0 }, // Starts off-screen to the right with a slight rotation
+        hidden: { x: '100vw', rotate: 20, opacity: 0 },
         visible: {
             x: 0,
             rotate: 0,
@@ -19,7 +25,7 @@ function StartGame() {
                 stiffness: 100,
                 damping: 10,
                 mass: 2.5,
-                duration: 3.8, // Slow down as it "skids" to a stop
+                duration: 3.8,
                 ease: 'easeOut',
             },
         },
@@ -37,7 +43,7 @@ function StartGame() {
                     className={styles.name}
                     initial={{ opacity: 1 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 3.8 }} // Input field fades in after the form settles
+                    transition={{ delay: 1, duration: 3.8 }}
                 >
                     <input
                         type="text"

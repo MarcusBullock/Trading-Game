@@ -3,9 +3,8 @@ import styles from './Dashboard.module.scss';
 import StartGame from './StartGame';
 
 function Dashboard() {
-    // Animation for the header
     const headerVariants = {
-        hidden: { y: '-100vh', opacity: 0 }, // Slide in from the top, initially invisible
+        hidden: { y: '-100vh', opacity: 0 },
         visible: {
             y: 0,
             opacity: 1,
@@ -13,7 +12,7 @@ function Dashboard() {
                 type: 'spring',
                 stiffness: 100,
                 damping: 10,
-                delay: 0.2, // Slight delay to sync with form animation
+                delay: 0.2,
                 duration: 1.5,
                 ease: 'easeInOut',
             },
