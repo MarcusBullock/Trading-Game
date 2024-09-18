@@ -1,0 +1,136 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    background-color: rgb(56, 58, 63);
+    overflow-x: hidden;
+    box-sizing: border-box;
+    color: #272525;
+    font-family: 'Tourney', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: 'wdth' 100;
+}
+
+html {
+    width: 100%;
+    font-size: 16px;
+    tab-size: 4;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    position: relative;
+    overflow: visible;
+    line-height: 1.4;
+}
+
+*,
+:after,
+:before {
+    box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    /* font-family: 'Playfair Display', serif; */
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+dl,
+dt,
+blockquote {
+    overflow-wrap: break-word;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    color: #272525;
+}
+
+textarea {
+    resize: vertical;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea,
+[tabindex] {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+button,
+input,
+select,
+textarea {
+    background-color: transparent;
+    border: 1px solid WindowFrame;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    padding: 0.25em 0.375em;
+}
+
+h1 {
+    font-size: 2rem;
+    font-style: normal;
+}
+
+h2 {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-style: normal;
+}
+
+h4 {
+    font-size: 1.125rem;
+    font-style: normal;
+}
+
+h5 {
+    font-weight: 500;
+    font-style: normal;
+}
+
+small {
+    font-size: 0.8rem;
+    font-style: normal;
+}
+
+main {
+    flex: 1;
+}
