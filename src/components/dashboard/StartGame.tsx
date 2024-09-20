@@ -1,17 +1,36 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import styles from './StartGame.module.scss';
+import { createGame, createGameUser } from '../../services/gameApi';
+import { useNavigate } from 'react-router-dom';
 
 function StartGame() {
-    function handleStartGame(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        console.log('Starting game...');
+    const [name, setName] = useState('');
+    const navigate = useNavigate();
 
-        // Create game user
+    async function handleStartGame(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const data = await createGameUser({
+            name,
+            finalScore: null,
+        });
+
+        console.log('DATA', data);
+
+        if (data === null || data === undefined)
+            throw new Error('Failed to create game user');
+
+        console.log('created user');
 
         // Create game session with new user ID
+        const newGame = await createGame({
+            userId: data[0].id,
+        });
 
+        console.log('created game');
         // Redirect user to new game page
+        if (newGame != null) navigate(`/game/${newGame[0].id}`);
     }
 
     const formVariants: Variants = {
@@ -49,6 +68,7 @@ function StartGame() {
                         type="text"
                         placeholder="Your name..."
                         maxLength={17}
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </motion.div>
                 <motion.button

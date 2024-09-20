@@ -1,0 +1,40 @@
+.instructions {
+    background-color: #ffee00;
+    padding: 10px 20px;
+    border-radius: 30px;
+
+    h2 {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 35px;
+        text-align: center;
+    }
+
+    p {        
+        font-family: "Stick No Bills", sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    @media screen and (min-width: 600px) {
+        width: 400px;
+        background-color: #ffee00;
+        padding: 30px;
+        border-radius: 30px;
+    
+        h2 {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 35px;
+            text-align: center;
+        }
+    
+        p {        
+            font-family: "Stick No Bills", sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+        }
+    }
+}
