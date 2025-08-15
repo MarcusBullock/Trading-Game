@@ -1,0 +1,100 @@
+.topBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    background-color: #ffee00;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .textRow {
+        padding: 12px 24px;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .lbl,
+        .player {
+            display: none;
+        }
+
+        .timer,
+        .balance {
+            display: flex;
+        }
+
+        .balance,
+        .player,
+        .timer {
+            width: 50%;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .countdown {
+            font-size: 34px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: row;
+
+            .colon {
+                color: #000;
+                padding: 0 5px;
+            }
+
+            .minutes,
+            .seconds {
+                display: flex;
+                flex-direction: row;
+                padding: 0 5px;
+                background-color: #000;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                width: 50px;
+                border-radius: 10px;
+            }
+        }
+
+        .gameOver,
+        .name {
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        @media screen and (min-width: 455px) {
+            .player {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        @media screen and (min-width: 775px) {
+            .balance,
+            .player {
+                width: 40%;
+            }
+
+            .timer {
+                width: 20%;
+            }
+
+            .lbl {
+                display: flex;
+                padding-right: 20px;
+            }
+
+            .gameOver,
+            .name {
+                font-size: 35px;
+            }
+        }
+    }
+}

@@ -8,22 +8,91 @@ export type Json =
 
 export type Database = {
   public: {
-    Tables: {      
+    Tables: {
+      company: {
+        Row: {
+          description: string
+          id: number
+          name: string
+          sector: string
+          symbol: string
+        }
+        Insert: {
+          description: string
+          id?: number
+          name: string
+          sector: string
+          symbol: string
+        }
+        Update: {
+          description?: string
+          id?: number
+          name?: string
+          sector?: string
+          symbol?: string
+        }
+        Relationships: []
+      }
+      gamePhase: {
+        Row: {
+          change: number
+          changePercent: number
+          companyId: number
+          created_at: Date
+          gameId: string
+          id: number
+          price: number
+        }
+        Insert: {
+          change: number
+          changePercent: number
+          companyId: number
+          created_at?: Date
+          gameId: string
+          id?: number
+          price: number
+        }
+        Update: {
+          change?: number
+          changePercent?: number
+          companyId?: number
+          created_at?: Date
+          gameId?: string
+          id?: number
+          price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gamePhase_companyId_fkey"
+            columns: ["companyId"]
+            isOneToOne: false
+            referencedRelation: "company"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gamePhase_gameId_fkey"
+            columns: ["gameId"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       games: {
         Row: {
           id: string
-          startTimeUtc: string | null
+          startTime: Date | null
           userId: number
         }
         Insert: {
           id?: string
-          startTimeUtc?: string | null
-          userId?: number | null
+          startTime?: Date | null
+          userId: number
         }
         Update: {
           id?: string
-          startTimeUtc?: string | null
-          userId?: number | null
+          startTime?: Date | null
+          userId?: number
         }
         Relationships: [
           {

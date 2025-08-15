@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import styles from './Dashboard.module.scss';
-import StartGame from './StartGame';
+import StartTrading from './StartTrading';
 
 function Dashboard() {
     const headerVariants = {
@@ -19,14 +19,13 @@ function Dashboard() {
         },
     };
 
-    // Animation for the text reveal (letters)
     const textReveal = {
         hidden: { opacity: 0, y: 20 },
         visible: (i: number) => ({
             opacity: 1,
             y: 0,
             transition: {
-                delay: i * 0.1, // Each letter appears with a small delay
+                delay: i * 0.1,
             },
         }),
     };
@@ -55,7 +54,7 @@ function Dashboard() {
                     ))}
                 </h1>
             </motion.div>
-            <StartGame />
+            <StartTrading />
         </div>
     );
 }

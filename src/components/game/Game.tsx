@@ -1,52 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-    GameRow,
-    GameUser,
-    getGame,
-    getGameUser,
+    GamePhaseInsert,
+    useCompanies,
+    useCreateGamePhases,
+    useGame,
+    useUpdateGame,
 } from '../../services/gameApi';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Game.module.scss';
 import Instructions from './Instructions';
+import MainGame from './main/MainGame';
+import generateGamePhase from '../../services/gamePhaseGenerator';
 
 function Game() {
     const { id } = useParams<{ id: string }>();
+    const [showInstructions, setShowInstructions] = useState(false);
+    const { data, isLoading, error } = useGame(id!);
+    const updateGame = useUpdateGame();
+    const createGamePhases = useCreateGamePhases();
+    const { data: companies } = useCompanies();
 
-    const [game, setGame] = useState<GameRow>();
-    const [user, setUser] = useState<GameUser>();
-    const [showInstructions, setShowInstructions] = useState<boolean>(false);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    if (data == null) return <div>Invalid URL</div>;
+    if (isLoading) return <div>Loading</div>;
+    if (error) return <div>Ooops... {error.message}</div>;
 
-    useEffect(() => {
-        async function fetchGameAndUser() {
-            try {
-                if (!id) throw new Error('Invalid game ID');
-                setLoading(true);
-
-                const gameData = await getGame(id!);
-                if (!gameData) throw new Error('No game data found');
-                setGame(gameData);
-
-                const userData = await getGameUser(gameData.userId);
-                if (!userData) throw new Error('No game user found');
-                setUser(userData);
-            } catch (err: any) {
-                console.error('Error:', err.message);
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchGameAndUser();
-    }, [id]);
-
-    if (loading) return <div>Loading</div>;
-    if (error) return <div>Ooops... {error}</div>;
-    if (user == null || game == null) return <div>Invalid URL</div>;
-
+    const { game, user } = data;
+    const gameHasStarted = game.startTime != null;
     const title = `Hi ${user.name}, welcome to the Trading Game.`;
     const headerVariants = {
         hidden: { y: '-100vh', opacity: 0 },
@@ -84,16 +64,37 @@ function Game() {
                 type: 'spring',
                 stiffness: 100,
                 damping: 10,
-                delay: 0.5, // Delay to sync with header reveal
+                delay: 0.5,
             },
         },
     };
 
-    // Instructions?
+    async function updateGameStartTime() {
+        const handleUpdate = () => {
+            updateGame.mutate({
+                gameId: id!,
+                gameUpdates: { startTime: new Date() },
+            });
+        };
+        handleUpdate();
 
-    // Button to start game properly
+        if (companies) {
+            const gamePhases: GamePhaseInsert[] = companies.map((company) =>
+                generateGamePhase(id!, company)
+            );
 
-    // Timer until next update
+            const handleCreateGamePhases = () => {
+                createGamePhases.mutate(gamePhases);
+            };
+
+            handleCreateGamePhases();
+        } else {
+            console.error('Companies not available');
+        }
+    }
+
+    if (gameHasStarted)
+        return <MainGame name={user.name} startTime={game.startTime} />;
 
     return (
         <div className={styles.game}>
@@ -132,6 +133,7 @@ function Game() {
                 <motion.button
                     className={styles.button}
                     variants={buttonVariants}
+                    onClick={updateGameStartTime}
                 >
                     Start Game
                 </motion.button>
